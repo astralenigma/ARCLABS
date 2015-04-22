@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Lab2Cliente
 {
-    class Program
+    class Cliente
     {
         const int PORTA = 6000;
         static void Main(string[] args)
