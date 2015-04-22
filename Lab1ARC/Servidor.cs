@@ -8,31 +8,26 @@ using System.Net.Sockets;
 
 namespace Lab1ARC
 {
-    class Program
+    class Servidor
     {
         const int NUMERODECONECCOES = 10;
         static void Main(string[] args)
         {
-            
-            Socket socket = new Socket(AddressFamily.InterNetwork,SocketType.Stream,ProtocolType.Tcp);
-            IPEndPoint ip = new IPEndPoint(IPAddress.Any,6000);
+
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 6000);
             socket.Bind(ip);
             socket.Listen(NUMERODECONECCOES);
             Console.WriteLine("Waiting...");
             Socket socket2 = socket.Accept();
 
-            
-                EndPoint ipep = socket2.RemoteEndPoint;
-                Console.WriteLine("Client " + ipep + " connected./n");
+            EndPoint ipep = socket2.RemoteEndPoint;
+            Console.WriteLine("Client " + ipep + " Connectado./n");
 
-                byte[] data = new byte[1024];
-                string mensagemEnviada = "Bem vindo/n";
-                data = Encoding.ASCII.GetBytes(mensagemEnviada);
-                socket2.Send(data);
-                
-            
-
-
+            byte[] data = new byte[1024];
+            string mensagemEnviada = "Bem vindo/n";
+            data = Encoding.ASCII.GetBytes(mensagemEnviada);
+            socket2.Send(data);
 
             Console.ReadLine();
         }
@@ -49,5 +44,5 @@ namespace Lab1ARC
 
         }
     }
-    
+
 }
