@@ -14,16 +14,31 @@ namespace Lab2Cliente
         static void Main(string[] args)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint ip = new IPEndPoint(IPAddress.Any, PORTA);
+            IPAddress ipad = IPAddress.Parse("127.0.0.1");
+            IPEndPoint ip = new IPEndPoint(ipad, PORTA);
             
             socket.Connect(ip);
             byte[] data = new byte[1024];
             socket.Receive(data);
             string mensagemRecebida = Encoding.ASCII.GetString(data);
             Console.WriteLine(mensagemRecebida);
-
+            enviarMensagens(socket);
+            socket.Shutdown(SocketShutdown.Both);
+            socket.Close();
             Console.ReadLine();
 
+        }
+        static void enviarMensagens(Socket socket)
+        {
+            string mensagem="";
+            do
+            {
+                mensagem = Console.ReadLine();
+                byte[] data = new byte[1024];
+                data = Encoding.ASCII.GetBytes(mensagem);
+                socket.Send(data);
+            } while (mensagem != "exit");
+            
         }
     }
 }

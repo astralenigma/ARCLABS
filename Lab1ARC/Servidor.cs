@@ -22,13 +22,13 @@ namespace Lab1ARC
             Socket socket2 = socket.Accept();
 
             EndPoint ipep = socket2.RemoteEndPoint;
-            Console.WriteLine("Client " + ipep + " Connectado./n");
+            Console.WriteLine("Client " + ipep + " Connectado.\n");
 
             byte[] data = new byte[1024];
-            string mensagemEnviada = "Bem vindo/n";
+            string mensagemEnviada = "Bem vindo\n";
             data = Encoding.ASCII.GetBytes(mensagemEnviada);
             socket2.Send(data);
-
+            receberMensagens(socket2);
             Console.ReadLine();
         }
         static void receberMensagens(Socket socket)
@@ -40,7 +40,7 @@ namespace Lab1ARC
                 string mensagemRecebida = Encoding.ASCII.GetString(data);
                 Console.WriteLine(mensagemRecebida);
             } while (socket.Connected);
-            Console.WriteLine("Client " + socket.RemoteEndPoint + " disconnected./n");
+            Console.WriteLine("Cliente " + socket.RemoteEndPoint + " disconectado.\n");
 
         }
     }
