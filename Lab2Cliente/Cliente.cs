@@ -24,49 +24,13 @@ namespace Lab2Cliente
             //Receber.Start();
             //Enviar.Start();
 
-            receberMensagem(socket);
-            enviarMensagens(socket);
+            oPC.receberMensagem();
+            oPC.enviarMensagens();
 
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
             //Console.ReadLine();
 
-        }
-
-        static void enviarMensagens(Socket socket)
-        {
-            string mensagem = "";
-            do
-            {
-                mensagem = enviarMensagem(socket);
-            } while (mensagem != "exit");
-
-        }
-
-        static String enviarMensagem(Socket socket)
-        {
-            string mensagem = "";
-            mensagem = Console.ReadLine();
-            byte[] data = new byte[1024];
-            data = Encoding.ASCII.GetBytes(mensagem);
-            socket.Send(data);
-            return mensagem;
-        }
-
-        static void receberMensagens(Socket socket)
-        {
-            do
-            {
-                receberMensagem(socket);
-            } while (socket.Connected);
-        }
-
-        static void receberMensagem(Socket socket)
-        {
-            byte[] data = new byte[1024];
-            socket.Receive(data);
-            string mensagemRecebida = Encoding.ASCII.GetString(data);
-            Console.Write(mensagemRecebida);
         }
 
         static Socket conectar(String ipStr)
