@@ -5,6 +5,8 @@ using System.Net;
 using System.Net.Sockets;
 using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using BibliotecaDeClasses;
 
 namespace Lab2Cliente
 {
@@ -15,19 +17,25 @@ namespace Lab2Cliente
         {
 
             Socket socket = conectar("127.0.0.1");
-            
-            receberMensagem(socket);
+            ProcessosConcurrentes oPC = new ProcessosConcurrentes(socket);
+            Thread Receber=new Thread(new ThreadStart(oPC.enviarMensagens));
+            Thread Enviar = new Thread(new ThreadStart(oPC.receberMensagens));
+
+            Receber.Start();
+            Enviar.Start();
+            //receberMensagem(socket);
             //byte[] data = new byte[1024];
             //socket.Receive(data);
             //string mensagemRecebida = Encoding.ASCII.GetString(data);
             //Console.WriteLine(mensagemRecebida);
 
-            enviarMensagens(socket);
+            //enviarMensagens(socket);
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
             Console.ReadLine();
 
         }
+
         static void enviarMensagens(Socket socket)
         {
             string mensagem = "";
@@ -37,6 +45,7 @@ namespace Lab2Cliente
             } while (mensagem != "exit");
 
         }
+
         static String enviarMensagem(Socket socket)
         {
             string mensagem = "";
