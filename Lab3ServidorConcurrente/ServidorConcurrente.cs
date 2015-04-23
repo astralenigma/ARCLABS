@@ -20,11 +20,12 @@ namespace Lab3ServidorConcurrente
             Socket socket2 = socket.Accept();
 
             EndPoint ipep = socket2.RemoteEndPoint;
-            Console.WriteLine("Cliente " + ipep + " Connectado.");
+            Console.WriteLine("Cliente " + ipep + " conectado.");
 
+            ProcessosComunicacao oPC = new ProcessosComunicacao(socket2);
             mensagemDeBoasVindas(socket2);
             
-            receberMensagens(socket2);
+            oPC.receberMensagens();
             Console.ReadLine();
         }
 
