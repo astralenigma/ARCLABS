@@ -31,16 +31,41 @@ namespace Lab3ServidorConcurrente
             receberMensagens(socket2);
             Console.ReadLine();
         }
+
         static void receberMensagens(Socket socket)
         {
             do
             {
-                byte[] data = new byte[1024];
-                socket.Receive(data);
-                string mensagemRecebida = Encoding.ASCII.GetString(data);
-                Console.Write(mensagemRecebida);
+                receberMensagem(socket);
             } while (socket.Connected);
-            Console.Write("Cliente " + socket.RemoteEndPoint + " disconectado.\n");
+        }
+
+        static void receberMensagem(Socket socket)
+        {
+            byte[] data = new byte[1024];
+            socket.Receive(data);
+            string mensagemRecebida = Encoding.ASCII.GetString(data);
+            Console.Write(mensagemRecebida);
+        }
+
+        static void enviarMensagens(Socket socket)
+        {
+            string mensagem = "";
+            do
+            {
+                mensagem = enviarMensagem(socket);
+            } while (mensagem != "exit");
+
+        }
+
+        static String enviarMensagem(Socket socket)
+        {
+            string mensagem = "";
+            mensagem = Console.ReadLine();
+            byte[] data = new byte[1024];
+            data = Encoding.ASCII.GetBytes(mensagem);
+            socket.Send(data);
+            return mensagem;
         }
     }
 }
