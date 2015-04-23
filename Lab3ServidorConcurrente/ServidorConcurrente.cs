@@ -22,11 +22,8 @@ namespace Lab3ServidorConcurrente
             EndPoint ipep = socket2.RemoteEndPoint;
             Console.WriteLine("Cliente " + ipep + " Connectado.");
 
-            /*Código dde enviar a mensagem de bem vindo*/
-            //byte[] data = new byte[1024];
-            //string mensagemEnviada = "Bem vindo\n";
-            //data = Encoding.ASCII.GetBytes(mensagemEnviada);
-            //socket2.Send(data);
+            mensagemDeBoasVindas(socket2);
+            
             receberMensagens(socket2);
             Console.ReadLine();
         }
@@ -37,6 +34,15 @@ namespace Lab3ServidorConcurrente
             socket.Bind(ip);
             socket.Listen(NUMERODECONECCOES);
             Console.WriteLine("Esperando...");
+        }
+
+        /*Código de enviar a mensagem de bem vindo*/
+        static void mensagemDeBoasVindas(Socket socket)
+        {
+            byte[] data = new byte[1024];
+            string mensagemEnviada = "Bem vindo\n";
+            data = Encoding.ASCII.GetBytes(mensagemEnviada);
+            socket.Send(data);
         }
         static void receberMensagens(Socket socket)
         {
