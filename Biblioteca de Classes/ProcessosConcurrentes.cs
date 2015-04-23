@@ -8,7 +8,7 @@ namespace BibliotecaDeClasses
 {
     public class ProcessosConcurrentes
     {
-        static void enviarMensagens(Socket socket)
+        public void enviarMensagens(Socket socket)
         {
             string mensagem = "";
             do
@@ -18,7 +18,7 @@ namespace BibliotecaDeClasses
 
         }
 
-        static String enviarMensagem(Socket socket)
+        public String enviarMensagem(Socket socket)
         {
             string mensagem = "";
             mensagem = Console.ReadLine();
@@ -28,7 +28,7 @@ namespace BibliotecaDeClasses
             return mensagem;
         }
 
-        static void receberMensagens(Socket socket)
+        public void receberMensagens(Socket socket)
         {
             do
             {
@@ -36,7 +36,7 @@ namespace BibliotecaDeClasses
             } while (socket.Connected);
         }
 
-        static void receberMensagem(Socket socket)
+        public void receberMensagem(Socket socket)
         {
             byte[] data = new byte[1024];
             socket.Receive(data);
