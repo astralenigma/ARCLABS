@@ -27,7 +27,7 @@ namespace BibliotecaDeClasses
         public String enviarMensagem()
         {
             string mensagem = "";
-            mensagem = Console.ReadLine();
+            mensagem = Console.ReadLine()+"\n";
             byte[] data = new byte[1024];
             data = Encoding.ASCII.GetBytes(mensagem);
             socket.Send(data);
@@ -47,6 +47,7 @@ namespace BibliotecaDeClasses
             byte[] data = new byte[1024];
             socket.Receive(data);
             string mensagemRecebida = Encoding.ASCII.GetString(data);
+            mensagemRecebida=mensagemRecebida.Replace("\0", "");
             Console.Write(mensagemRecebida);
         }
     }
