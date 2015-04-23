@@ -13,11 +13,8 @@ namespace Lab2Cliente
         const int PORTA = 6000;
         static void Main(string[] args)
         {
-            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPAddress ipad = IPAddress.Parse("127.0.0.1");
-            IPEndPoint ip = new IPEndPoint(ipad, PORTA);
-            
-            socket.Connect(ip);
+
+            Socket socket = conectar("127.0.0.1");
             byte[] data = new byte[1024];
             socket.Receive(data);
             string mensagemRecebida = Encoding.ASCII.GetString(data);
@@ -39,6 +36,16 @@ namespace Lab2Cliente
                 socket.Send(data);
             } while (mensagem != "exit");
             
+        }
+        static Socket conectar(String ipStr)
+        {
+            Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            IPAddress ipad = IPAddress.Parse(ipStr);
+            IPEndPoint ip = new IPEndPoint(ipad, PORTA);
+            
+            socket.Connect(ip);
+
+            return socket;
         }
     }
 }
