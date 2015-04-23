@@ -21,18 +21,15 @@ namespace Lab2Cliente
             Thread Receber=new Thread(new ThreadStart(oPC.enviarMensagens));
             Thread Enviar = new Thread(new ThreadStart(oPC.receberMensagens));
 
-            Receber.Start();
-            Enviar.Start();
-            //receberMensagem(socket);
-            //byte[] data = new byte[1024];
-            //socket.Receive(data);
-            //string mensagemRecebida = Encoding.ASCII.GetString(data);
-            //Console.WriteLine(mensagemRecebida);
+            //Receber.Start();
+            //Enviar.Start();
 
-            //enviarMensagens(socket);
+            receberMensagem(socket);
+            enviarMensagens(socket);
+
             socket.Shutdown(SocketShutdown.Both);
             socket.Close();
-            Console.ReadLine();
+            //Console.ReadLine();
 
         }
 
