@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 using System.Net.Sockets;
 namespace BibliotecaDeClasses
 {
-    public class ProcessosConcurrentes
+    public class ProcessosComunicacao
     {
         Socket socket;
         
-       public ProcessosConcurrentes(Socket socket)
+       public ProcessosComunicacao(Socket socket)
         {
             this.socket = socket;
         }

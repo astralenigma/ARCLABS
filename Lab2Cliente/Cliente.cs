@@ -17,7 +17,7 @@ namespace Lab2Cliente
         {
 
             Socket socket = conectar("127.0.0.1");
-            ProcessosConcurrentes oPC = new ProcessosConcurrentes(socket);
+            ProcessosComunicacao oPC = new ProcessosComunicacao(socket);
             Thread Receber=new Thread(new ThreadStart(oPC.enviarMensagens));
             Thread Enviar = new Thread(new ThreadStart(oPC.receberMensagens));
 
