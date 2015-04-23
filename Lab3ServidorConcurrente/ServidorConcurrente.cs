@@ -22,7 +22,7 @@ namespace Lab3ServidorConcurrente
             Socket socket2 = socket.Accept();
 
             EndPoint ipep = socket2.RemoteEndPoint;
-            Console.WriteLine("Client " + ipep + " Connectado.\n");
+            Console.WriteLine("Client " + ipep + " Connectado.");
 
             byte[] data = new byte[1024];
             string mensagemEnviada = "Bem vindo\n";
@@ -38,10 +38,9 @@ namespace Lab3ServidorConcurrente
                 byte[] data = new byte[1024];
                 socket.Receive(data);
                 string mensagemRecebida = Encoding.ASCII.GetString(data);
-                Console.WriteLine(mensagemRecebida);
+                Console.Write(mensagemRecebida);
             } while (socket.Connected);
-            Console.WriteLine("Cliente " + socket.RemoteEndPoint + " disconectado.\n");
-
+            Console.Write("Cliente " + socket.RemoteEndPoint + " disconectado.\n");
         }
     }
 }

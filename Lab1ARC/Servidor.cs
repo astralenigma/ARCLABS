@@ -38,7 +38,7 @@ namespace Lab1ARC
                 byte[] data = new byte[1024];
                 socket.Receive(data);
                 string mensagemRecebida = Encoding.ASCII.GetString(data);
-                Console.WriteLine(mensagemRecebida);
+                Console.Write(mensagemRecebida);
             } while (socket.Connected);
             Console.WriteLine("Cliente " + socket.RemoteEndPoint + " disconectado.\n");
 
