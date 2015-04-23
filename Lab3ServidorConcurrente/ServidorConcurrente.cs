@@ -16,23 +16,28 @@ namespace Lab3ServidorConcurrente
         static void Main(string[] args)
         {
             Socket socket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
-            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 6000);
-            socket.Bind(ip);
-            socket.Listen(NUMERODECONECCOES);
-            Console.WriteLine("Waiting...");
+            inicializacao(socket);
             Socket socket2 = socket.Accept();
 
             EndPoint ipep = socket2.RemoteEndPoint;
-            Console.WriteLine("Client " + ipep + " Connectado.");
+            Console.WriteLine("Cliente " + ipep + " Connectado.");
 
-            byte[] data = new byte[1024];
-            string mensagemEnviada = "Bem vindo\n";
-            data = Encoding.ASCII.GetBytes(mensagemEnviada);
-            socket2.Send(data);
+            /*Código dde enviar a mensagem de bem vindo*/
+            //byte[] data = new byte[1024];
+            //string mensagemEnviada = "Bem vindo\n";
+            //data = Encoding.ASCII.GetBytes(mensagemEnviada);
+            //socket2.Send(data);
             receberMensagens(socket2);
             Console.ReadLine();
         }
 
+        static void inicializacao(Socket socket)
+        {
+            IPEndPoint ip = new IPEndPoint(IPAddress.Any, 6000);
+            socket.Bind(ip);
+            socket.Listen(NUMERODECONECCOES);
+            Console.WriteLine("Esperando...");
+        }
         static void receberMensagens(Socket socket)
         {
             do
