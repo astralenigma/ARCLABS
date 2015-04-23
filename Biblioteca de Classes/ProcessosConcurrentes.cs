@@ -8,17 +8,23 @@ namespace BibliotecaDeClasses
 {
     public class ProcessosConcurrentes
     {
-        public void enviarMensagens(Socket socket)
+        Socket socket;
+        
+       public ProcessosConcurrentes(Socket socket)
+        {
+            this.socket = socket;
+        }
+        public void enviarMensagens()
         {
             string mensagem = "";
             do
             {
-                mensagem = enviarMensagem(socket);
+                mensagem = enviarMensagem();
             } while (mensagem != "exit");
 
         }
 
-        public String enviarMensagem(Socket socket)
+        public String enviarMensagem()
         {
             string mensagem = "";
             mensagem = Console.ReadLine();
@@ -28,15 +34,15 @@ namespace BibliotecaDeClasses
             return mensagem;
         }
 
-        public void receberMensagens(Socket socket)
+        public void receberMensagens()
         {
             do
             {
-                receberMensagem(socket);
+                receberMensagem();
             } while (socket.Connected);
         }
 
-        public void receberMensagem(Socket socket)
+        public void receberMensagem()
         {
             byte[] data = new byte[1024];
             socket.Receive(data);
